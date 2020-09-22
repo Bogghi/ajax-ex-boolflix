@@ -18,7 +18,40 @@
 $(document).ready(function(){
 
     $(".search").keyup(function(e){
-        console.log(e.which);
+        if(e.which == 13){
+            searchFilm($(".search").val());
+        }
     })
 
 });
+
+//ajax enclosoure for calling the api
+function searchFilm(keyword){
+
+    $.ajax({
+        url:"https://api.themoviedb.org/3/search/collection",
+        data: {
+            "api_key": "3152f889c9071336ed974e61bf0dab9f",
+            "language": "en-US",
+            "query": keyword,
+            "page": 1
+        },
+        success: function(data,state){
+            var resultSet = data.results;
+            for(var i = 0; i < resultSet.length; i++){
+                // console.log(resultSet[i]);
+                renderFilm(resultSet[i]);
+            }
+        },
+        error: function(request, state, error){
+
+        }
+    });
+
+}
+
+//function to render html based on the template from the object recived from the api
+function renderFilm(filmObj){
+    var template = Handlebars.compile($("#template").html());
+    $(".film-list").append(template(filmObj));
+}
