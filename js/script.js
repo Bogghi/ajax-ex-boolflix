@@ -23,13 +23,17 @@ $(document).ready(function(){
         }
     })
 
+    $(".searchButton").click(function(){
+        searchFilm($(".search").val());
+    })
+
 });
 
 //ajax enclosoure for calling the api
 function searchFilm(keyword){
 
     $.ajax({
-        url:"https://api.themoviedb.org/3/search/collection",
+        url:"https://api.themoviedb.org/3/search/movie",
         data: {
             "api_key": "3152f889c9071336ed974e61bf0dab9f",
             "language": "en-US",
