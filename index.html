@@ -21,14 +21,18 @@
 
     </div>
 
+    
+
     <!-- <i class="fas fa-star"></i> -->
 
     <script id="template" type="text">
         <div class="film">
-            <h2 class="title">{{title}}</h2>
-            <p class="sub-title">{{original_title}}</p>
+            <h2 class="title">{{title}}{{name}}</h2>
+            <p class="sub-title">{{original_title}}{{original_name}}</p>
             <p>{{overview}}</p>
             <div class="vote_average"></div>
+            <p>{{source}}</p>
+            <img src="img/svg/012-united states.svg" alt="language-flag" class="language-flag">
         </div>
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 

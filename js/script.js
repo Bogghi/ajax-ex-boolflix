@@ -13,21 +13,22 @@ $(document).ready(function(){
 
     $(".search").keyup(function(e){
         if(e.which == 13){
-            searchFilm($(".search").val());
+            search($(".search").val(),"movie");
+            search($(".search").val(),"tv");
         }
     })
 
     $(".searchButton").click(function(){
-        searchFilm($(".search").val());
+        search($(".search").val(),"movie");
+        search($(".search").val(),"tv");
     })
 
 });
 
 //ajax enclosoure for calling the api
-function searchFilm(keyword){
-
+function search(keyword, category){
     $.ajax({
-        url:"https://api.themoviedb.org/3/search/movie",
+        url:"https://api.themoviedb.org/3/search/" + category,
         data: {
             "api_key": "3152f889c9071336ed974e61bf0dab9f",
             "language": "en-US",
@@ -36,9 +37,10 @@ function searchFilm(keyword){
         },
         success: function(data,state){
             var resultSet = data.results;
+            console.log(resultSet.length + " " + category);
             for(var i = 0; i < resultSet.length; i++){
                 resultSet[i].vote_average = Math.ceil(resultSet[i].vote_average/2);
-                renderFilm(resultSet[i]);
+                renderFilm(resultSet[i],category);
             }
         },
         error: function(request, state, error){
@@ -49,18 +51,25 @@ function searchFilm(keyword){
 }
 
 //function to render html based on the template from the object recived from the api
-function renderFilm(filmObj){
+function renderFilm(filmObj, source){
     var template = Handlebars.compile($("#template").html());
     var rating = filmObj.vote_average;
-    var star = document.createElement("i");
 
+    filmObj.source = source;
+
+    $(".film-list").append(template(filmObj));
+    starRendering(rating);
+}
+
+//convfert number rating into star 1 to 5
+function starRendering(nStar){
+    var star = document.createElement("i");
     star.classList.add("fas");
     star.classList.add("fa-star");
-    $(".film-list").append(template(filmObj));
 
     var ratingDomObj = $(".film:last-child .vote_average");
 
-    for(var i = 0; i < rating; i++){
+    for(var i = 0; i < nStar; i++){
         ratingDomObj.append(star.cloneNode());
     }
 }

@@ -8,3 +8,8 @@
     justify-content: center;
     width: 1000px;
 }
+
+.language-flag {
+    width: 80px;
+    height: 80px;
+}
