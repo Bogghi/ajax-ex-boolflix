@@ -8,8 +8,59 @@
 // Qui un esempio di chiamata per le serie tv:
 // https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=scrubs
 
+var flag = {
+    "path": "img/svg/selected/",
+    "name": [
+        {
+            "img": "cs.svg",
+            "original_language": "cs"
+        },
+        {
+            "img": "da.svg",
+            "original_language": "da"
+        },
+        {
+            "img": "de.svg",
+            "original_language": "de"
+        },
+        {
+            "img": "en.svg",
+            "original_language": "en"
+        },
+        {
+            "img": "es.svg",
+            "original_language": "es"
+        },
+        {
+            "img": "fr.svg",
+            "original_language": "fr"
+        },
+        {
+            "img": "it.svg",
+            "original_language": "it"
+        },
+        {
+            "img": "pt.svg",
+            "original_language": "pt"
+        },
+        {
+            "img": "ru.svg",
+            "original_language": "ru"
+        },
+        {
+            "img": "th.svg",
+            "original_language": "th"
+        },
+        {
+            "img": "uk.svg",
+            "original_language": "uk"
+        }
+    ]
+};
 
 $(document).ready(function(){
+
+    console.log(flag.name.length);
 
     $(".search").keyup(function(e){
         if(e.which == 13){
@@ -37,7 +88,7 @@ function search(keyword, category){
         },
         success: function(data,state){
             var resultSet = data.results;
-            console.log(resultSet.length + " " + category);
+            // console.log(resultSet.length + " " + category);
             for(var i = 0; i < resultSet.length; i++){
                 resultSet[i].vote_average = Math.ceil(resultSet[i].vote_average/2);
                 renderFilm(resultSet[i],category);
@@ -54,8 +105,14 @@ function search(keyword, category){
 function renderFilm(filmObj, source){
     var template = Handlebars.compile($("#template").html());
     var rating = filmObj.vote_average;
-
+    //setuping api source to be displayed
     filmObj.source = source;
+
+    console.log(imgPath(filmObj.original_language));
+
+    filmObj.original_language = imgPath(filmObj.original_language);
+
+    // console.log(filmObj);
 
     $(".film-list").append(template(filmObj));
     starRendering(rating);
@@ -72,4 +129,21 @@ function starRendering(nStar){
     for(var i = 0; i < nStar; i++){
         ratingDomObj.append(star.cloneNode());
     }
+}
+
+
+//scanning our array to get the flag image path
+function imgPath(isoCode){
+    var i = 0, imgPath = "";
+    while(i < flag.name.length){
+        if(flag.name[i].original_language == isoCode){
+            imgPath = flag.path + flag.name[i].img;
+            break;
+        }
+        i++;
+    }    
+    if(i == flag.name.length){
+        imgPath = flag.path + "eu.svg";
+    }
+    return imgPath;
 }
