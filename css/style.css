@@ -1,15 +1,52 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    border: 0px;
+}
+
 .wrapper{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    background-color: black;
+    height: 80px;
+}
+
+.logo {
+    width: 200px;
+    height: 60px;
+    margin: 10px;
 }
 
 .container {
     display: flex;
-    justify-content: center;
-    width: 1000px;
+    justify-content: flex-end;
+    margin: 10px
+}
+
+.container input{
+    margin-right: 2px;
+    padding: 0px 20px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.container button{
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 0px 20px;
+}
+
+.container button:hover{
+    background-color: gray;
 }
 
 .language-flag {
     width: 80px;
     height: 80px;
+}
+
+.show-container {
+    height: calc(100vh - 80px);
+    background-color: gray;
+    overflow-x: scroll;
 }

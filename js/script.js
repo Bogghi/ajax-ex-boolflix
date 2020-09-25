@@ -1,11 +1,8 @@
-// Ciao Ragazzi!! Milestone 3 di Boolflix!! :star::star::star:
-// In questa milestone come prima cosa aggiungiamo la copertina del film o della serie al nostro elenco.
-// Ci viene passata dall’API solo la parte finale dell’URL, questo perché poi potremo generare da quella porzione di URL tante dimensioni diverse.
-// Dovremo prendere quindi l’URL base delle immagini di TMDB: https://image.tmdb.org/t/p/ per poi aggiungere la dimensione che vogliamo generare (troviamo tutte le dimensioni possibili a questo link: https://www.themoviedb.org/talk/53c11d4ec3a3684cf4006400) per poi aggiungere la parte finale dell’URL passata dall’API.
-// Esempio di URL che torna la copertina di PEPPA PIG:
-// https://image.tmdb.org/t/p/w185/tZgQ76hS9RFIwFyUxzctp1Pkz0N.jpg
-// Finita la Milestone fate un po' di refactoring mi raccomando :wink:
-// Buon lavoro! :slightly_smiling_face:
+// MILESTONE 4:
+// Trasformiamo quello che abbiamo fatto fino ad ora in una vera e propria webapp, creando un layout completo simil-Netflix:
+// Un header che contiene logo e search bar
+// Dopo aver ricercato qualcosa nella searchbar, i risultati appaiono sotto forma di “card” in cui lo sfondo è rappresentato dall’immagine di copertina (consiglio la poster_path con w342)
+// Andando con il mouse sopra una card (on hover), appaiono le informazioni aggiuntive già prese nei punti precedenti più la overview
 
 
 var flag = {
@@ -86,6 +83,7 @@ function search(keyword, category){
         },
         success: function(data,state){
             var resultSet = data.results;
+            clear();
             for(var i = 0; i < resultSet.length; i++){
                 resultSet[i].vote_average = Math.ceil(resultSet[i].vote_average/2);
                 renderFilm(resultSet[i],category);
@@ -98,6 +96,12 @@ function search(keyword, category){
 
 }
 
+//clear the previous api result
+function clear(){
+    $(".move-list .show").remove();
+    $(".tv-list .show").remove();
+}
+
 //function to render html based on the template from the object recived from the api
 function renderFilm(showObj, source){
     var template = Handlebars.compile($("#template").html());
@@ -106,6 +110,7 @@ function renderFilm(showObj, source){
     //converting language into a flag to be displayed
     showObj.original_language = imgPath(showObj.original_language);
 
+    //convert the poster path into full path
     if(showObj.poster_path != null){
         showObj.poster_path = "https://image.tmdb.org/t/p/w342" + showObj.poster_path;;
     }
