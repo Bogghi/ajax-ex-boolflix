@@ -48,5 +48,17 @@
 .show-container {
     height: calc(100vh - 80px);
     background-color: gray;
+}
+
+.horizontal-scroll-wrapper {
+    width: 100%;
     overflow-x: scroll;
+    display: flex;
+}
+
+.show {
+    width: 342px;
+    height: 515px;
+    background-image: url("../img/no_poster.png");
+    border: 1px solid white;
 }

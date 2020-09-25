@@ -73,6 +73,7 @@ $(document).ready(function(){
 
 //ajax enclosoure for calling the api
 function search(keyword, category){
+    clear();
     $.ajax({
         url:"https://api.themoviedb.org/3/search/" + category,
         data: {
@@ -83,7 +84,6 @@ function search(keyword, category){
         },
         success: function(data,state){
             var resultSet = data.results;
-            clear();
             for(var i = 0; i < resultSet.length; i++){
                 resultSet[i].vote_average = Math.ceil(resultSet[i].vote_average/2);
                 renderFilm(resultSet[i],category);
@@ -98,7 +98,7 @@ function search(keyword, category){
 
 //clear the previous api result
 function clear(){
-    $(".move-list .show").remove();
+    $(".movie-list .show").remove();
     $(".tv-list .show").remove();
 }
 
