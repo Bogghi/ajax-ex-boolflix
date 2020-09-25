@@ -110,12 +110,13 @@ function renderFilm(showObj, source){
     //converting language into a flag to be displayed
     showObj.original_language = imgPath(showObj.original_language);
 
+    var show = $("." + source + "-list").append(template(showObj));
+    
     //convert the poster path into full path
     if(showObj.poster_path != null){
         showObj.poster_path = "https://image.tmdb.org/t/p/w342" + showObj.poster_path;;
+        show.find(".show:last-child").css("background-image","url('"+showObj.poster_path+"')");
     }
-
-    $("." + source + "-list").append(template(showObj));
     starRendering(rating, source);
     
 }

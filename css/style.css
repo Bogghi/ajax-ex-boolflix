@@ -4,10 +4,13 @@
     border: 0px;
 }
 
+body {
+    background-image: linear-gradient(rgba(0,0,0,1) 0%, rgba(10,10,10,1) 35%, rgba(46,46,46,1) 100%);
+}
+
 .wrapper{
     display: flex;
     justify-content: space-between;
-    background-color: black;
     height: 80px;
 }
 
@@ -47,11 +50,17 @@
 
 .show-container {
     height: calc(100vh - 80px);
-    background-color: gray;
+}
+
+h2{
+    text-transform: uppercase;
+    color: white;
 }
 
 .horizontal-scroll-wrapper {
     width: 100%;
+    height: 600px;
+    margin: 0px 50px;
     overflow-x: scroll;
     display: flex;
 }
@@ -59,6 +68,29 @@
 .show {
     width: 342px;
     height: 515px;
+    flex-shrink: 0;
+    margin-left:20px;
+    margin-top: 50px;
     background-image: url("../img/no_poster.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     border: 1px solid white;
+    border-radius: 10px;
+    transition: transform 0.5s linear, backdrop-filter 0.5s linear;   
+}
+
+.show * {
+    display: none;
+}
+
+.show:hover * {
+    display: block;
+}
+
+.show:hover {
+    z-index: 10;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: scale(1.1);
+    backdrop-filter: blur(4px);
 }
