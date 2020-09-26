@@ -50,9 +50,12 @@ body {
 
 .show-container {
     height: calc(100vh - 80px);
+    overflow-y: scroll;
 }
 
 h2{
+    padding: 0px 70px;
+    font-size: 30px;
     text-transform: uppercase;
     color: white;
 }
@@ -60,9 +63,10 @@ h2{
 .horizontal-scroll-wrapper {
     width: 100%;
     height: 600px;
-    margin: 0px 50px;
+    padding: 0px 50px;
     overflow-x: scroll;
     display: flex;
+    scrollbar-width: none;
 }
 
 .show {
@@ -71,19 +75,28 @@ h2{
     flex-shrink: 0;
     margin-left:20px;
     margin-top: 50px;
+    transition: transform 0.3s linear;   
+}
+
+.show .show-info {
+    display: none;
+}
+
+.background {
+    width: 342px;
+    height: 515px;
     background-image: url("../img/no_poster.png");
     background-repeat: no-repeat;
     background-size: cover;
     border: 1px solid white;
     border-radius: 10px;
-    transition: transform 0.5s linear, backdrop-filter 0.5s linear;   
 }
 
-.show * {
-    display: none;
-}
+/* .background:hover{
+    filter: blur(4px)
+} */
 
-.show:hover * {
+.show:hover .show-info {
     display: block;
 }
 
@@ -92,5 +105,21 @@ h2{
     background-repeat: no-repeat;
     background-size: cover;
     transform: scale(1.1);
-    backdrop-filter: blur(4px);
+}
+.show-info {
+    width: 342px;
+    height: 515px;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    position: absolute;
+    padding: 20px 20px;
+    overflow-y: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.overview {
+    overflow-y: hidden;
 }

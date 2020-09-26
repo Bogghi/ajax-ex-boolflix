@@ -62,14 +62,25 @@ $(document).ready(function(){
             search($(".search").val(),"movie");
             search($(".search").val(),"tv");
         }
-    })
+    });
 
     $(".searchButton").click(function(){
         search($(".search").val(),"movie");
         search($(".search").val(),"tv");
-    })
+    });
+
+    //adding blur to film backgraound
+    $(document).mouseenter(function(){
+        $(".show").hover(function(){
+            $(this).find(".background").css("filter","blur(1px)");
+        }, function(){
+            $(this).find(".background").css("filter","none");
+        });
+    });
 
 });
+
+//    filter: blur(4px)
 
 //ajax enclosoure for calling the api
 function search(keyword, category){
@@ -115,7 +126,7 @@ function renderFilm(showObj, source){
     //convert the poster path into full path
     if(showObj.poster_path != null){
         showObj.poster_path = "https://image.tmdb.org/t/p/w342" + showObj.poster_path;;
-        show.find(".show:last-child").css("background-image","url('"+showObj.poster_path+"')");
+        show.find(".show:last-child .background").css("background-image","url('"+showObj.poster_path+"')");
     }
     starRendering(rating, source);
     

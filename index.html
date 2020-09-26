@@ -34,11 +34,15 @@
 
     <script id="template" type="text">
         <div class="show">
-            <h3 class="title">Title: {{title}}{{name}}</h2>
-            <p class="sub-title">Original title: {{original_title}}{{original_name}}</p>
-            <p>overview: {{overview}}</p>
-            <div class="vote_average">vote: </div>
-            <img src="{{original_language}}" alt="language-flag" class="language-flag">
+            <div class="background"></div>
+            <div class="black-backdrop"></div>
+            <div class="show-info">
+                <h3 class="title">Title: {{title}}{{name}}</h2>
+                <p class="sub-title">Original title: {{original_title}}{{original_name}}</p>
+                <p class="overview">overview: {{overview}}</p>
+                <div class="vote_average">vote: </div>
+                <img src="{{original_language}}" alt="language-flag" class="language-flag">
+            </div>
         </div>
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
