@@ -9,6 +9,7 @@
 </head>
 <body>
     
+    <!-- navbar for logo and search bar -->
     <nav class="wrapper">
         <img src="img/boolflix_logo.png" alt="" class="logo">
         
@@ -18,12 +19,15 @@
         </div>
     </nav>
 
+    <!-- container for the show -->
     <div class="show-container">
         <h2>Film</h2>
+        <!-- film carosel kind of -->
         <div class="movie-list horizontal-scroll-wrapper">
             
         </div>
         
+        <!-- tv sereis carosel kind of -->
         <h2>tv series</h2>
         <div class="tv-list horizontal-scroll-wrapper">
             
@@ -31,11 +35,10 @@
     </div>
 
     
-
+    <!-- template for the show -->
     <script id="template" type="text">
         <div class="show">
             <div class="background"></div>
-            <div class="black-backdrop"></div>
             <div class="show-info">
                 <h3 class="title">Title: {{title}}{{name}}</h2>
                 <p class="sub-title">Original title: {{original_title}}{{original_name}}</p>

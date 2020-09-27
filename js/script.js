@@ -56,7 +56,8 @@ var flag = {
 };
 
 $(document).ready(function(){
-
+    var backgroundSaved = true;
+    //event handler for the enter button in the input area
     $(".search").keyup(function(e){
         if(e.which == 13){
             search($(".search").val(),"movie");
@@ -64,23 +65,31 @@ $(document).ready(function(){
         }
     });
 
+    //event handle for the click on the seatch button
     $(".searchButton").click(function(){
+        console.log("click");
         search($(".search").val(),"movie");
         search($(".search").val(),"tv");
     });
 
-    //adding blur to film backgraound
-    $(document).mouseenter(function(){
+    $(".show-container").mouseover(function(){
         $(".show").hover(function(){
-            $(this).find(".background").css("filter","blur(1px)");
+            var obj = $(this).find(".background");
+            if(backgroundSaved){
+                localStorage["background"] = obj.css("background-image");
+                backgroundSaved = false;
+            }
+            obj.removeAttr("style");
+            console.log(localStorage["background"] + " mouse in");
         }, function(){
-            $(this).find(".background").css("filter","none");
-        });
-    });
+            backgroundSaved = true;
+            console.log(localStorage["background"] + " mouse out");
+            var obj = $(this).find(".background");
+            obj.css("background-image",localStorage["background"]);
+        })
+    })
 
 });
-
-//    filter: blur(4px)
 
 //ajax enclosoure for calling the api
 function search(keyword, category){
@@ -126,6 +135,9 @@ function renderFilm(showObj, source){
     //convert the poster path into full path
     if(showObj.poster_path != null){
         showObj.poster_path = "https://image.tmdb.org/t/p/w342" + showObj.poster_path;;
+        show.find(".show:last-child .background").css("background-image","url('"+showObj.poster_path+"')");
+    }else {
+        showObj.poster_path = "img/no_poster.png";
         show.find(".show:last-child .background").css("background-image","url('"+showObj.poster_path+"')");
     }
     starRendering(rating, source);
