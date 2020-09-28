@@ -73,7 +73,8 @@ $(document).ready(function(){
     });
 
     $(".show-container").mouseover(function(){
-        $(".show").hover(function(){
+        
+        $(".show").mouseover(function(){
             var obj = $(this).find(".background");
             if(backgroundSaved){
                 localStorage["background"] = obj.css("background-image");
@@ -81,12 +82,15 @@ $(document).ready(function(){
             }
             obj.removeAttr("style");
             console.log(localStorage["background"] + " mouse in");
-        }, function(){
+        });
+
+        $(".show").mouseleave(function(){
             backgroundSaved = true;
             console.log(localStorage["background"] + " mouse out");
             var obj = $(this).find(".background");
             obj.css("background-image",localStorage["background"]);
-        })
+        });
+
     })
 
 });
